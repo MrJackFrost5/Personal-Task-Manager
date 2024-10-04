@@ -1,0 +1,26 @@
+{% extends "core/html/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-column justify-content-center mt-4">
+    <div class="d-flex flex-column align-items-center">
+        <button class="btn btn-outline-primary m-4 shadow mb-4" onclick="displayTaskMenu()">New Task</button>
+        <div class="task_creation-field outline-secondary p-3 mb-4 shadow task-info d-none">
+
+            <!-- put like a fake task as a placeholder -->
+            <textarea id="scaling-textarea" class="text-input form-control mb-3" rows="1" placeholder="Start writing here..."></textarea>
+            <button class="btn btn-outline-secondary btn-sm recurring-btn" onclick="changeRecurring()">Not Recurring</button>
+            <button class="btn btn-outline-primary btn-sm create-task-btn" onclick="createTask()">Create Task</button>
+            <button class="btn btn-outline-secondary btn-sm deadline-btn" onclick="setDeadling()">Set Deadline</button>
+        </div>
+        <!--
+            - task text
+            - deadline
+            - recurring
+            - completed
+        -->
+        <div class="task-list m-5"></div>
+    </div>
+</div>
+{% endblock %}
