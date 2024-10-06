@@ -10,17 +10,13 @@
 
             <!-- put like a fake task as a placeholder -->
             <textarea id="scaling-textarea" class="text-input form-control mb-3" rows="1" placeholder="Start writing here..."></textarea>
-            <button class="btn btn-outline-secondary btn-sm recurring-btn" onclick="changeRecurring()">Not Recurring</button>
-            <button class="btn btn-outline-primary btn-sm create-task-btn" onclick="createTask()">Create Task</button>
-            <button class="btn btn-outline-secondary btn-sm deadline-btn" onclick="setDeadling()">Set Deadline</button>
+            <div class="button-container d-flex justify-content-center gap-3">
+                <button class="btn btn-outline-secondary btn-sm recurring-btn" onclick="changeRecurring()">Not Recurring</button>
+                <button class="btn btn-outline-primary btn-sm create-task-btn" onclick="createTask()">Create Task</button>
+                <button class="btn btn-outline-secondary btn-sm deadline-btn" onclick="setDeadling()">Set Deadline</button>
+            </div>
         </div>
-        <!--
-            - task text
-            - deadline
-            - recurring
-            - completed
-        -->
-        <div class="task-list m-5"></div>
+        <div class="task-list m-5 w-75"></div>
     </div>
 </div>
 {% endblock %}

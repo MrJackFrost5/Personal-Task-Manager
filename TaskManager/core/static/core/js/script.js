@@ -1,8 +1,8 @@
 function displayTaskMenu() {
     let taskInfo = document.querySelector(".task-info");
 
-    if (taskInfo.className == "task_creation-field outline-secondary p-3 shadow task-info") {taskInfo.className = "task_creation-field outline-secondary p-3 shadow task-info d-none"} 
-    else {taskInfo.className = "task_creation-field outline-secondary p-3 shadow task-info"}    
+    if (taskInfo.className == "task_creation-field outline-secondary p-3 shadow task-info") {taskInfo.className = "task_creation-field outline-secondary p-3 shadow task-info w-75 d-none"} 
+    else {taskInfo.className = "task_creation-field outline-secondary p-3 shadow task-info w-75"}    
 };
 
 function addElement(parent, elemType, className) {
@@ -25,38 +25,43 @@ function createTask() {
 
     // creating task div
 
-    let newTask = addElement(document.querySelector(".task-list"), "div", "task d-flex p-4 gap-4 shadow")
+    let newTask = addElement(document.querySelector(".task-list"), "div", "task d-flex p-4 mb-3 gap-4 shadow")
 
     let taskText = addElement(newTask, "div", "task-content");
     taskText.textContent = writtenText;
-    let completedButton = addElement(newTask, "button", "completed-button btn btn-outline-primary btn-sm");
+
+    let buttonContainer = addElement(newTask, "div", "d-flex f-direction-row gap-3");
+
+    let completedButton = addElement(buttonContainer, "button", "completed-button btn btn-outline-primary btn-sm");
     completedButton.textContent = "Mark Completed";
-    let removeButton = addElement(newTask, "button", "btn btn-outline-danger btn-sm");
+    let removeButton = addElement(buttonContainer, "button", "btn btn-outline-danger btn-sm");
     removeButton.textContent = "Remove Task";
 
     // onclick events
 
-    completedButton.onclick = function() {
-        let task = this.parentElement
-        let taskContent = task.querySelector(".task-content");
 
+
+    // draw a tree so u know the heirarchy of each class / element
+
+
+
+    completedButton.onclick = function() {
+        let task = this.parentElement.parentElement;
+        let taskContent = task.querySelector(".task-content");
         if (taskContent.className == "task-content text-decoration-line-through text-danger") {
-            markCompleted(task, "task d-flex p-4 gap-4 shadow", "task-content", "Mark Completed");
+            markCompleted(task, "task d-flex p-4 gap-4 mb-3 shadow", "task-content", "Mark Completed");
         } else {
-            markCompleted(task, "task d-flex p-4 gap-4 shadow bg-light", "task-content text-decoration-line-through text-danger", "Mark Uncompleted");
-            task.className = "task d-flex p-4 gap-4 shadow bg-light";
-            taskContent.className = "task-content text-decoration-line-through text-danger";
-            task.querySelector(".completed-button").textContent = "Mark Uncompleted"; // u might just be able to do document.queryselector instead
+            markCompleted(task, "task d-flex p-4 gap-4 mb-3 shadow bg-light", "task-content text-decoration-line-through text-danger", "Mark Uncompleted");
         }
     }
 
     removeButton.onclick = function() {
-        let placeHolderChangeLater = this.parentElement;
-        placeHolderChangeLater.remove();
+        let task = this.parentElement.parentElement;
+        task.remove();
     }
 
     if (document.querySelector(".recurring-btn").textContent == "Recurring") {
-        taskText.className = "task-content text-success"; // this part resets when marked completed and uncompleted.
+        //taskText.className = "task-content text-success"; // this part resets when marked completed and uncompleted.
                                                         // just have an icon to show that it repeats or smth.
                                                         // then as it removes all tasks at midnight, check
                                                         // which ones have recurring enabled
